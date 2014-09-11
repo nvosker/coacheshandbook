@@ -1,6 +1,6 @@
 package com.akiosoft.mycoach;
 
-import android.support.v4.app.DialogFragment;
+import android.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 
 import com.akiosoft.mycoach.com.akiosoft.mycoach.dialog.DeleteConfirmationFragment;

@@ -10,5 +10,5 @@ import java.util.ArrayList;
  * Created by nvoskeritchian on 9/7/14.
  */
 public class Application extends android.app.Application {
-    ArrayList<Sport> greetings = Lists.newArrayList();
+    public ArrayList<Sport> greetings = Lists.newArrayList();
 }

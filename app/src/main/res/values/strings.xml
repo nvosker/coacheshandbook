@@ -13,5 +13,23 @@
     <string name="delete">Delete</string>
     <string name="dialog_delete_confirmation">Are you sure you want to delete this record?</string>
     <string name="cancel">Cancel</string>
+    <!-- Nav Drawer Menu Items -->
+    <string-array name="nav_drawer_items">
+        <item >Home</item>
+        <item >Sports</item>
+        <item >Teams</item>
+        <item >Drills</item>
+    </string-array>
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_people</item>
+        <item>@drawable/ic_photos</item>
+    </array>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+    <!-- Content Description -->
+    <string name="desc_list_item_icon">Item Icon</string>
 
 </resources>
