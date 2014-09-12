@@ -9,4 +9,11 @@
         android:orderInCategory="10"
         android:title="@string/new_item">
     </item>
+    <item
+        android:id="@+id/delete_item"
+        android:icon="@drawable/ic_action_discard"
+        app:showAsAction="always"
+        android:orderInCategory="10"
+        android:title="@string/delete_item">
+    </item>
 </menu>

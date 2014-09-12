@@ -16,6 +16,7 @@
     <string name="dialog_save_confirmation">Are you sure you want to save this record?</string>
     <string name="cancel">Cancel</string>
     <string name="new_item">New</string>
+    <string name="delete_item">Delete</string>
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item >Home</item>

@@ -16,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,6 +54,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
     private AuthorizationCheckTask mAuthTask;
     private String mEmailAccount = "";
     private Sport selectedSport;
+    private ListView listView;
 
     public SportsFragment() {
     }
@@ -69,11 +71,12 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_sports, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.greetings_list_view);
+        listView = (ListView) rootView.findViewById(R.id.greetings_list_view);
         mListAdapter = new GreetingsDataAdapter((Application) getActivity().getApplication());
         listView.setAdapter(mListAdapter);
         listView.setLongClickable(true);
         listView.setClickable(true);
+        listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
                 DeleteConfirmationFragment d = new DeleteConfirmationFragment();
@@ -82,15 +85,10 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                 return true;
             }
         });
-        listView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 selectedSport = (Sport) adapterView.getItemAtPosition(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
@@ -117,6 +115,15 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                 CreateSportDialog d = new CreateSportDialog();
                 d.setTargetFragment(SportsFragment.this, 0);
                 d.show(getFragmentManager(), "NewSport");
+//                this.onClickGetGreeting(item.getActionView());
+                return true;
+            case R.id.delete_item:
+                Log.d(LOG_TAG, "Delete action item selected");
+                if(selectedSport!=null) {
+                    DeleteConfirmationFragment dc = new DeleteConfirmationFragment();
+                    dc.setTargetFragment(SportsFragment.this, 0);
+                    dc.show(getFragmentManager(), selectedSport.getName());
+                }
 //                this.onClickGetGreeting(item.getActionView());
                 return true;
             default:
@@ -322,7 +329,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
 
     @Override
     public void onDialogConfirmClick(DialogFragment dialog) {
-        if (dialog instanceof DeleteConfirmationFragment) {
+        if (dialog instanceof DeleteConfirmationFragment && selectedSport!=null) {
             Log.e(LOG_TAG, "Delete sport was selected");
 //        Toast.makeText(MyActivity.this, "Delete was touched", Toast.LENGTH_SHORT).show();
             AsyncTask<String, Void, Void> getAndDisplayGreeting =
@@ -348,7 +355,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                         }
                     };
 
-            getAndDisplayGreeting.execute(((DeleteConfirmationFragment) dialog).getTag());
+            getAndDisplayGreeting.execute(selectedSport.getName());
         } else if (dialog instanceof CreateSportDialog) {
             this.onClickGetGreeting(((AlertDialog) dialog.getDialog()).findViewById(R.id.sport_name_edit_text));
         }
