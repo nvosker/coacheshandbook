@@ -49,7 +49,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
 
     private static final String LOG_TAG = "SportsFragment";
     private static final int ACTIVITY_RESULT_FROM_ACCOUNT_SELECTION = 2222;
-    private GreetingsDataAdapter mListAdapter;
+    private SportsDataAdapter mListAdapter;
     private AuthorizationCheckTask mAuthTask;
     private String mEmailAccount = "";
     private Sport selectedSport;
@@ -71,7 +71,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
 
         View rootView = inflater.inflate(R.layout.fragment_sports, container, false);
         listView = (ListView) rootView.findViewById(R.id.greetings_list_view);
-        mListAdapter = new GreetingsDataAdapter((Application) getActivity().getApplication());
+        mListAdapter = new SportsDataAdapter((Application) getActivity().getApplication());
         listView.setAdapter(mListAdapter);
         listView.setLongClickable(true);
         listView.setClickable(true);
@@ -116,7 +116,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                 CreateSportDialog d = new CreateSportDialog();
                 d.setTargetFragment(SportsFragment.this, 0);
                 d.show(getFragmentManager(), "NewSport");
-//                this.onClickGetGreeting(item.getActionView());
+//                this.createNewSport(item.getActionView());
                 return true;
             case R.id.delete_item:
                 Log.d(LOG_TAG, "Delete action item selected");
@@ -125,7 +125,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                     dc.setTargetFragment(SportsFragment.this, 0);
                     dc.show(getFragmentManager(), selectedSport.getName());
                 }
-//                this.onClickGetGreeting(item.getActionView());
+//                this.createNewSport(item.getActionView());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -142,7 +142,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                 this.populateSportList(v);
                 break;
 //            case R.id.create_sport_button:
-//                this.onClickGetGreeting(v);
+//                this.createNewSport(v);
 //                break;
         }
     }
@@ -218,7 +218,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
         }
     }
 
-    public void onClickGetGreeting(View view) {
+    public void createNewSport(View view) {
         View rootView = view.getRootView();
         //REVERT
         TextView greetingIdInputTV = (TextView) view.findViewById(R.id.sport_name_edit_text);
@@ -307,7 +307,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                     @Override
                     protected void onPostExecute(SportCollection greeting) {
                         if (greeting != null) {
-                            displayGreetings(greeting.getItems());
+                            displaySports(greeting.getItems());
                         } else {
                             Log.e(LOG_TAG, "No greetings were returned by the API.");
                         }
@@ -317,7 +317,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
         getAuthedSportList.execute((Void) null);
     }
 
-    private void displayGreetings(List<Sport> greetings) {
+    private void displaySports(List<Sport> greetings) {
         String msg;
         if (greetings == null || greetings.size() < 1) {
             msg = "Greeting was not present";
@@ -360,7 +360,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
 
             getAndDisplayGreeting.execute(selectedSport.getName());
         } else if (dialog instanceof CreateSportDialog) {
-            this.onClickGetGreeting(((AlertDialog) dialog.getDialog()).findViewById(R.id.sport_name_edit_text));
+            this.createNewSport(((AlertDialog) dialog.getDialog()).findViewById(R.id.sport_name_edit_text));
         }
     }
 
@@ -381,8 +381,8 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
      * Simple use of an ArrayAdapter but we're using a static class to ensure no references to the
      * Activity exists.
      */
-    static class GreetingsDataAdapter extends ArrayAdapter {
-        GreetingsDataAdapter(Application application) {
+    static class SportsDataAdapter extends ArrayAdapter {
+        SportsDataAdapter(Application application) {
             super(application.getApplicationContext(), android.R.layout.simple_list_item_1,
                     application.greetings);
         }
