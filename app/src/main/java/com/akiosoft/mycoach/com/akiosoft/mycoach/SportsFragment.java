@@ -16,7 +16,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -98,6 +97,8 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
 //        b.setOnClickListener(this);
         b = (Button) rootView.findViewById(R.id.get_all_sport_button);
         b.setOnClickListener(this);
+
+        this.onClickSignIn(rootView);
         return rootView;
     }
 
@@ -138,7 +139,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                 onClickSignIn(v);
                 break;
             case R.id.get_all_sport_button:
-                this.onClickGetAuthenticatedGreeting(v);
+                this.populateSportList(v);
                 break;
 //            case R.id.create_sport_button:
 //                this.onClickGetGreeting(v);
@@ -166,6 +167,8 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                 emailAddressTV.setText(accounts[0].name);
                 mEmailAccount = accounts[0].name;
                 performAuthCheck(accounts[0].name);
+
+                this.populateSportList(view);
             }
         } else {
             // More than one Google Account is present, a chooser is necessary.
@@ -254,7 +257,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                         List<Sport> sports = new ArrayList<Sport>();
                         if (sport != null) {
                             sports.add(sport);
-                            onClickGetAuthenticatedGreeting(null);
+                            populateSportList(null);
                         } else {
                             Log.e(LOG_TAG, "No sports were returned by the API.");
                         }
@@ -264,13 +267,13 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
         getAndDisplayGreeting.execute(sportName);
     }
 
-    public void onClickGetAuthenticatedGreeting(View unused) {
+    public void populateSportList(View unused) {
         if (!isSignedIn()) {
             Toast.makeText(getActivity(), "You must sign in for this action.", Toast.LENGTH_LONG).show();
             return;
         }
 
-        AsyncTask<Void, Void, SportCollection> getAuthedGreetingAndDisplay =
+        AsyncTask<Void, Void, SportCollection> getAuthedSportList =
                 new AsyncTask<Void, Void, SportCollection>() {
                     @Override
                     protected SportCollection doInBackground(Void... unused) {
@@ -311,7 +314,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
                     }
                 };
 
-        getAuthedGreetingAndDisplay.execute((Void) null);
+        getAuthedSportList.execute((Void) null);
     }
 
     private void displayGreetings(List<Sport> greetings) {
@@ -350,7 +353,7 @@ public class SportsFragment extends Fragment implements View.OnClickListener, Ab
 
                         @Override
                         protected void onPostExecute(Void sport) {
-                            onClickGetAuthenticatedGreeting(null);
+                            populateSportList(null);
 
                         }
                     };
