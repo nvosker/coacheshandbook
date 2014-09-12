@@ -12,7 +12,7 @@ public class CreateSportDialog extends AbstractCallbackDialog {
 
     @Override
     protected View getCustomView(LayoutInflater inflater) {
-        return inflater.inflate(R.layout.dialog_create_sport,null);
+        return inflater.inflate(R.layout.fragment_create_sport,null);
     }
 
     @Override
