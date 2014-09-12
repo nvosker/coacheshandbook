@@ -12,7 +12,10 @@
   </string>
     <string name="delete">Delete</string>
     <string name="dialog_delete_confirmation">Are you sure you want to delete this record?</string>
+    <string name="save">Save</string>
+    <string name="dialog_save_confirmation">Are you sure you want to save this record?</string>
     <string name="cancel">Cancel</string>
+    <string name="new_item">New</string>
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item >Home</item>

@@ -1,17 +1,11 @@
 package com.akiosoft.mycoach;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -22,37 +16,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.akiosoft.coachapi.server.dao.coachApi.CoachApi;
-import com.akiosoft.coachapi.server.dao.coachApi.model.Sport;
-import com.akiosoft.coachapi.server.dao.coachApi.model.SportCollection;
 import com.akiosoft.mycoach.com.akiosoft.mycoach.HomeFragment;
+import com.akiosoft.mycoach.com.akiosoft.mycoach.SportsFragment;
 import com.akiosoft.mycoach.com.akiosoft.mycoach.com.akiosoft.mycoach.ui.adapter.NavDrawerListAdapter;
-import com.akiosoft.mycoach.com.akiosoft.mycoach.dialog.DeleteConfirmationFragment;
 import com.akiosoft.mycoach.com.akiosoft.mycoach.ui.model.NavDrawerItem;
-import com.google.android.gms.auth.GoogleAuthException;
-import com.google.android.gms.auth.GoogleAuthUtil;
-import com.google.android.gms.common.AccountPicker;
-import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
-import com.google.api.client.util.Strings;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MyActivity extends ActionBarActivity {
     private static final String LOG_TAG = "MainActivity";
-//    private GreetingsDataAdapter mListAdapter
-//
-    private static final int ACTIVITY_RESULT_FROM_ACCOUNT_SELECTION = 2222;
-//
-//    private AuthorizationCheckTask mAuthTask;
-    private String mEmailAccount = "";
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -78,18 +53,6 @@ public class MyActivity extends ActionBarActivity {
 
         // Prevent the keyboard from being visible upon startup.
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
-//        ListView listView = (ListView) findViewById(R.id.greetings_list_view);
-//        mListAdapter = new GreetingsDataAdapter((Application) getApplication());
-//        listView.setAdapter(mListAdapter);
-//        listView.setLongClickable(true);
-//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-//                DeleteConfirmationFragment d = new DeleteConfirmationFragment();
-//                d.show(getSupportFragmentManager(), ((Sport) parent.getItemAtPosition(position)).getName());
-//                return true;
-//            }
-//        });
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -264,22 +227,6 @@ public class MyActivity extends ActionBarActivity {
 
 
 
-
-
-    public static class SportsFragment extends Fragment {
-
-        public SportsFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-
-            View rootView = inflater.inflate(R.layout.fragment_sports, container, false);
-
-            return rootView;
-        }
-    }
 
     public static class TeamsFragment extends Fragment {
 

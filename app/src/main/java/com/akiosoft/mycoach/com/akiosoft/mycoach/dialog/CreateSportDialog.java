@@ -6,22 +6,22 @@ import android.view.View;
 import com.akiosoft.mycoach.R;
 
 /**
- * Created by nvoskeritchian on 9/10/14.
+ * Created by nvoskeritchian on 9/11/14.
  */
-public class DeleteConfirmationFragment extends AbstractCallbackDialog {
+public class CreateSportDialog extends AbstractCallbackDialog {
 
     @Override
     protected View getCustomView(LayoutInflater inflater) {
-        return null;
+        return inflater.inflate(R.layout.dialog_create_sport,null);
     }
 
     @Override
     protected int getMessageId() {
-        return R.string.dialog_delete_confirmation;
+        return R.string.dialog_save_confirmation;
     }
 
     @Override
     protected int getConfirmButtonTextId() {
-        return R.string.delete;
+        return R.string.save;
     }
 }

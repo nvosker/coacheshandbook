@@ -11,7 +11,7 @@ import com.akiosoft.mycoach.com.akiosoft.mycoach.dialog.DeleteConfirmationFragme
 public class SportsActivity  extends ActionBarActivity implements DeleteConfirmationFragment.NoticeDialogListener{
 
     @Override
-    public void onDialogDeleteClick(DialogFragment dialog) {
+    public void onDialogConfirmClick(DialogFragment dialog) {
 
     }
 
